@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>今天吃什麼？台灣鹹食美食抽籤筒</title>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+  <title>🎰 今日美食樂透開獎機 🎰</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #FFFDF2;
-      --card-bg: #FFFFFF;
-      --primary-yellow: #FFE066;
-      --soft-yellow: #FFF2B2;
-      --soft-pink: #FFD1DC;
-      --accent-orange: #FF9B42;
-      --text-color: #5A4A42;
-      --light-text: #9E8E85;
-      --border-color: #F7E7C4;
-      --shadow: 0 10px 25px rgba(230, 190, 100, 0.22);
+      --bg-color: #1A1A2E;
+      --card-bg: #16213E;
+      --gold-primary: #FFD700;
+      --gold-dark: #D4AF37;
+      --accent-red: #E94560;
+      --text-color: #FFFFFF;
+      --light-text: #E0E0E0;
+      --border-color: #FFD700;
+      --shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
     }
 
     * {
@@ -34,23 +33,24 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 20px 14px 30px 14px;
-      background-image: radial-gradient(var(--border-color) 1.5px, transparent 1.5px);
+      padding: 16px 14px 30px 14px;
+      background-image: radial-gradient(#2A2A4A 1.5px, transparent 1.5px);
       background-size: 18px 18px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       width: 100%;
-      max-width: 360px;
+      max-width: 380px;
     }
 
     header h1 {
       font-size: 1.6rem;
       font-weight: 900;
-      color: var(--text-color);
-      margin-bottom: 6px;
+      color: var(--gold-primary);
+      text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+      margin-bottom: 4px;
     }
 
     .sub-title {
@@ -59,264 +59,318 @@
       font-weight: 700;
     }
 
-    /* 籤筒區域 */
-    .pot-container {
+    .day-selector-card {
       width: 100%;
-      max-width: 360px;
-      height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      margin-bottom: 20px;
-    }
-
-    .pot-svg {
-      width: 160px;
-      height: 200px;
-      cursor: pointer;
-      filter: drop-shadow(0 8px 15px rgba(230, 190, 100, 0.3));
-      transition: transform 0.2s;
-    }
-
-    .pot-svg:active {
-      transform: scale(0.95);
-    }
-
-    /* 搖晃動畫 */
-    .shake {
-      animation: potShake 0.6s ease-in-out infinite;
-    }
-
-    @keyframes potShake {
-      0%, 100% { transform: rotate(0deg); }
-      20% { transform: rotate(-8deg) translateY(-4px); }
-      40% { transform: rotate(8deg) translateY(-2px); }
-      60% { transform: rotate(-6deg) translateY(-4px); }
-      80% { transform: rotate(6deg) translateY(-1px); }
-    }
-
-    /* 抽出的竹籤 */
-    .stick {
-      position: absolute;
-      top: 40px;
-      width: 28px;
-      height: 140px;
-      background: #F4C472;
-      border: 2px solid #D69E43;
-      border-radius: 6px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      writing-mode: vertical-rl;
-      font-weight: 900;
-      font-size: 0.9rem;
-      color: #5A4A42;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      opacity: 0;
-      transform: translateY(40px) scale(0.8);
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 10;
-    }
-
-    .stick.pop-out {
-      opacity: 1;
-      transform: translateY(-50px) scale(1.1);
-    }
-
-    /* 結果展示卡片 */
-    .result-card {
-      width: 100%;
-      max-width: 360px;
+      max-width: 380px;
       background: var(--card-bg);
-      border: 3.5px solid var(--border-color);
-      border-radius: 24px;
-      padding: 24px 20px;
-      box-shadow: var(--shadow);
-      text-align: center;
+      border: 2px solid var(--gold-dark);
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+
+    .day-select {
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--gold-primary);
+      background: #0F3460;
+      color: #FFF;
+      font-weight: 700;
+      outline: none;
+    }
+
+    /* 樂透開獎機螢幕容器 */
+    .lotto-machine {
+      width: 100%;
+      max-width: 380px;
+      background: linear-gradient(145deg, #0F3460, #16213E);
+      border: 4px solid var(--gold-primary);
+      border-radius: 28px;
+      padding: 20px 16px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), inset 0 0 15px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin-bottom: 20px;
-      min-height: 160px;
+      position: relative;
+    }
+
+    /* 樂透彩球顯示區 */
+    .ball-container {
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle at 30% 30%, #FFE600, #FF9900);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6), inset -5px -5px 15px rgba(0,0,0,0.4), inset 5px 5px 15px rgba(255,255,255,0.8);
+      margin-bottom: 16px;
+      border: 3px solid #FFF;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ball-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #1A1A2E;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    }
+
+    /* 滾動彩球動畫 */
+    .rolling {
+      animation: ballRoll 0.15s infinite linear;
+    }
+
+    @keyframes ballRoll {
+      0% { transform: rotate(0deg) scale(0.95); }
+      50% { transform: rotate(180deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(0.95); }
+    }
+
+    /* 店名顯示面板 */
+    .display-screen {
+      width: 100%;
+      background: #000;
+      border: 2px solid var(--gold-dark);
+      border-radius: 14px;
+      padding: 14px 10px;
+      text-align: center;
+      min-height: 80px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      box-shadow: inset 0 0 10px rgba(0,255,0,0.2);
     }
 
-    .food-tag {
-      display: inline-block;
-      background: var(--soft-yellow);
-      color: var(--accent-orange);
-      font-size: 0.8rem;
+    .store-name-display {
+      font-size: 1.4rem;
       font-weight: 900;
-      padding: 4px 12px;
-      border-radius: 12px;
-      margin-bottom: 8px;
-      border: 1.5px solid var(--border-color);
+      color: var(--gold-primary);
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+      word-break: break-all;
     }
 
-    .food-name {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--text-color);
-      margin-bottom: 6px;
+    .store-status {
+      font-size: 0.78rem;
+      color: #00FF66;
+      margin-top: 4px;
     }
 
-    .food-desc {
-      font-size: 0.85rem;
-      color: var(--light-text);
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
+    /* 操作按鈕 */
     .action-btn {
       width: 100%;
-      max-width: 360px;
-      background: linear-gradient(135deg, var(--primary-yellow) 0%, #FFD000 100%);
-      color: var(--text-color);
-      border: 2.5px solid var(--border-color);
+      max-width: 380px;
+      background: linear-gradient(135deg, var(--accent-red) 0%, #C02739 100%);
+      color: #FFF;
+      border: 3px solid var(--gold-primary);
       padding: 14px;
       border-radius: 20px;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 900;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 210, 0, 0.3);
-      transition: transform 0.15s;
+      box-shadow: 0 6px 15px rgba(233, 69, 96, 0.4);
+      transition: transform 0.1s, box-shadow 0.1s;
+      text-align: center;
+      margin-bottom: 16px;
     }
 
     .action-btn:active {
       transform: scale(0.96);
+    }
+
+    /* 地圖地標導航按鈕 */
+    .map-btn {
+      display: none;
+      width: 100%;
+      max-width: 380px;
+      background: #00ADB5;
+      color: #FFF;
+      border: 2px solid #A6E3E9;
+      padding: 12px;
+      border-radius: 16px;
+      font-size: 1rem;
+      font-weight: 900;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 173, 181, 0.3);
+    }
+
+    /* 名單總覽彈窗/列表區 */
+    .pool-info {
+      font-size: 0.75rem;
+      color: var(--light-text);
+      text-align: center;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🍱 今天吃什麼？</h1>
-    <div class="sub-title">台灣鹹食隨機抽籤筒 • 拯救正餐選擇困難！</div>
+    <h1>🎰 美食樂透開獎機 🎰</h1>
+    <div class="sub-title">自動避開今日公休日 • 幸運開出今日大餐！</div>
   </header>
 
-  <!-- 籤筒區域 -->
-  <div class="pot-container">
-    <!-- 抽出之竹籤 -->
-    <div class="stick" id="stick">大吉</div>
-
-    <!-- 籤筒 SVG -->
-    <svg class="pot-svg" id="pot" viewBox="0 0 100 120" onclick="drawFood()">
-      <!-- 籤筒內的竹籤群 -->
-      <rect x="35" y="15" width="5" height="40" rx="2" fill="#E2AC53" transform="rotate(-12 37 35)"/>
-      <rect x="45" y="10" width="5" height="45" rx="2" fill="#F4C472" transform="rotate(-4 47 32)"/>
-      <rect x="52" y="12" width="5" height="42" rx="2" fill="#E2AC53" transform="rotate(6 54 33)"/>
-      <rect x="60" y="18" width="5" height="38" rx="2" fill="#F4C472" transform="rotate(15 62 37)"/>
-
-      <!-- 籤筒筒身 -->
-      <path d="M 20 40 L 25 110 C 25 113, 28 115, 32 115 L 68 115 C 72 115, 75 110 L 80 40 Z" fill="#FF9B42" stroke="#5A4A42" stroke-width="3"/>
-      <!-- 籤筒口緣 -->
-      <ellipse cx="50" cy="40" rx="30" ry="6" fill="#FFB766" stroke="#5A4A42" stroke-width="3"/>
-      <!-- 籤筒裝飾條與文字 -->
-      <rect x="23" y="65" width="54" height="28" rx="4" fill="#FFFDF2" stroke="#F7E7C4" stroke-width="2"/>
-      <text x="50" y="84" font-size="14" font-weight="900" fill="#D85A75" text-anchor="middle">籤筒</text>
-    </svg>
+  <!-- 星期切換器（預設為今天） -->
+  <div class="day-selector-card">
+    <span>📅 當前抽籤目標：</span>
+    <select class="day-select" id="daySelect" onchange="updateAvailablePool()">
+      <option value="0">星期日 (Sun)</option>
+      <option value="1">星期一 (Mon)</option>
+      <option value="2">星期二 (Tue)</option>
+      <option value="3">星期三 (Wed)</option>
+      <option value="4">星期四 (Thu)</option>
+      <option value="5">星期五 (Fri)</option>
+      <option value="6">星期六 (Sat)</option>
+    </select>
   </div>
 
-  <!-- 結果展示卡片 -->
-  <div class="result-card">
-    <div id="resultContent">
-      <div class="food-tag">✨ 正餐想吃啥？</div>
-      <div class="food-name">搖一搖籤筒！</div>
-      <div class="food-desc">點擊下方按鈕或直接點擊籤筒抽取美食</div>
+  <!-- 樂透搖獎機介面 -->
+  <div class="lotto-machine">
+    <div class="ball-container" id="ball">
+      <div class="ball-number" id="ballNum">?</div>
+    </div>
+
+    <div class="display-screen">
+      <div class="store-name-display" id="storeName">按下開獎鈕！</div>
+      <div class="store-status" id="storeStatus">準備開獎中...</div>
     </div>
   </div>
 
-  <button class="action-btn" id="drawBtn" onclick="drawFood()">🎲 搖一搖，選今日正餐！</button>
+  <button class="action-btn" id="drawBtn" onclick="startLotto()">🎱 搖出今日幸運美食！</button>
+  <a class="map-btn" id="mapBtn" href="#" target="_blank">🗺️ 查看 Google 地圖導航</a>
+
+  <div class="pool-info" id="poolInfo">正在計算今日可抽餐廳...</div>
 
   <script>
-    // 50 種台灣常見鹹食美食資料庫
-    var foods = [
-      { name: "滷肉飯", tag: "經典主食", desc: "鹹香濃郁的滷汁淋在熱騰騰白飯上，配上一顆滷蛋最完美！" },
-      { name: "牛肉麵", tag: "經典主食", desc: "軟嫩入味的牛肉搭配濃郁紅燒或清燉湯頭，心滿意足。" },
-      { name: "雞排", tag: "夜市必吃", desc: "外皮酥脆、肉汁滿溢，撒上胡椒粉和辣粉超過癮。" },
-      { name: "蚵仔煎", tag: "夜市必吃", desc: "新鮮蚵仔加上雞蛋與青菜，淋上甜辣醬汁超對味。" },
-      { name: "臭豆腐", tag: "夜市必吃", desc: "外酥內嫩的臭豆腐搭配酸甜台式泡菜，經典不敗！" },
-      { name: "小籠包", tag: "名揚國際", desc: "皮薄餡多湯汁鮮美，沾點薑絲黑醋一口咬下爆汁！" },
-      { name: "大腸包小腸", tag: "夜市必吃", desc: "烤糯米腸包夾多汁香腸，蒜頭與酸菜是靈魂配料。" },
-      { name: "肉圓", tag: "懷舊小吃", desc: "Q 彈的外皮包著香噴噴肉餡，淋上特製甜辣醬。" },
-      { name: "麵線羹", tag: "懷舊小吃", desc: "滑順麵線搭配香滷大腸或鮮美蚵仔，加點蒜泥更讚！" },
-      { name: "蛋餅", tag: "早午餐點", desc: "粉漿或酥皮任選，夾入起司、培根或鮪魚都合適。" },
-      { name: "飯糰", tag: "早午餐點", desc: "糯米包著酥脆油條、肉鬆與酸菜，紮實又飽足。" },
-      { name: "刈包", tag: "傳統美食", desc: "台式漢堡！鬆軟白包夾三層肉、酸菜與花生粉。" },
-      { name: "鹽酥雞", tag: "宵夜首選", desc: "九層塔香氣四溢，各種炸物隨心搭配的最佳宵夜！" },
-      { name: "胡椒餅", tag: "夜市必吃", desc: "貼爐烘烤至金黃，一口咬下滿滿蔥香與黑胡椒肉餡。" },
-      { name: "筒仔米糕", tag: "傳統美食", desc: "粒粒分明的糯米飯搭配香菇與肉燥，香氣逼人。" },
-      { name: "乾麵", tag: "街角小吃", desc: "古早味紅油乾麵或麻醬麵，簡單拌開就是極致美味。" },
-      { name: "台南碗粿", tag: "南部名產", desc: "軟 Q 米漿包裹香菇、蛋黃與豬肉，淋上鹹甜醬油膏。" },
-      { name: "虱目魚湯", tag: "鮮美湯品", desc: "肉質細緻鮮甜，加點薑絲煎魚肚或煮湯都極美味。" },
-      { name: "當歸鴨湯", tag: "滋補湯品", desc: "溫潤中藥香氣，鴨肉軟嫩，冬天喝上一碗全身舒暢。" },
-      { name: "貢丸湯", tag: "經典湯品", desc: "彈牙多汁的香菇貢丸搭配芹菜湯頭，小吃店必點。" },
-      { name: "豬血湯", tag: "懷舊小吃", desc: "搭配沙茶、酸菜與韭菜，軟嫩無腥味的傳統好滋味。" },
-      { name: "排骨飯", tag: "台式便當", desc: "厚實醃製排骨炸至香酥，搭配古早味配菜超滿足。" },
-      { name: "控肉飯", tag: "經典主食", desc: "肥瘦相間的控肉滷至入口即化，醬汁超下飯。" },
-      { name: "火雞肉飯", tag: "嘉義名產", desc: "鮮嫩火雞肉絲淋上雞油與蔥酥，香氣撲鼻一口接一口。" },
-      { name: "蔥油餅", tag: "下午茶點", desc: "表皮煎至金黃酥脆，層層蔥香加顆蛋更美味。" },
-      { name: "潤餅", tag: "傳統美食", desc: "薄皮包裹高麗菜、豆芽、紅燒肉與滿滿花生糖粉。" },
-      { name: "烤玉米", tag: "夜市必吃", desc: "刷上厚厚特製沙茶醬汁烘烤，香氣四溢軟 Q 有勁。" },
-      { name: "生煎包", tag: "街頭小吃", desc: "底層煎至金黃酥脆，內餡鮮美多汁，撒上芝麻超香。" },
-      { name: "豬血糕", tag: "夜市必吃", desc: "蒸得軟糯的豬血糕裹上厚厚花生粉與香菜。" },
-      { name: "酸辣湯", tag: "經典湯品", desc: "木耳、豆腐、筍絲與蛋花，酸辣夠味超開胃。" },
-      { name: "羊肉爐", tag: "進補鍋物", desc: "帶皮羊肉軟嫩無腥味，藥燉湯頭甘甜暖胃。" },
-      { name: "薑母鴨", tag: "進補鍋物", desc: "老薑與老薑母麻油爆香，冷天裡圍爐的最佳選擇。" },
-      { name: "麻辣火鍋", tag: "人氣鍋物", desc: "鴨血豆腐吸滿麻辣湯汁，涮肉超入味。" },
-      { name: "溫州大餛飩", tag: "飽足麵食", desc: "薄皮大餡的鮮肉或蝦仁餛飩，湯頭清爽鮮美。" },
-      { name: "三杯雞", tag: "台菜熱炒", desc: "黑麻油、米酒與醬油香氣融合九層塔，超級下飯！" },
-      { name: "鳳梨蝦球", tag: "經典台菜", desc: "酥炸蝦仁裹上美乃滋搭配鳳梨，酸甜大人小孩都愛。" },
-      { name: "宮保雞丁", tag: "熱炒必點", desc: "雞肉鮮嫩、花生香脆，微辣乾椒香氣十足。" },
-      { name: "台式鐵板燒", tag: "平價飽足", desc: "大火快炒黑胡椒牛肉配高麗菜與豆芽，白飯殺手！" },
-      { name: "海鮮炒麵", tag: "熱炒主食", desc: "大火爆香蝦仁、花枝與油麵，滿滿澎湃海味。" },
-      { name: "廣東粥", tag: "暖胃首選", desc: "熬至綿密的粥底搭配皮蛋、瘦肉與酥脆油條。" },
-      { name: "客家炒鹹豬肉", tag: "客家美食", desc: "鹹香爆炒蒜苗與五花肉，配酒配飯都合適。" },
-      { name: "炒米粉", tag: "台式傳統", desc: "米粉吸滿香菇肉絲與高麗菜精華，乾爽 Q 彈。" },
-      { name: "鹹酥蝦", tag: "熱炒必點", desc: "帶殼炸至香酥再撒上椒鹽蒜苗，連蝦殼都想吃掉！" },
-      { name: "薑絲炒大腸", tag: "客家美食", desc: "酸香夠味的醋勁搭配彈牙大腸，開胃解膩。" },
-      { name: "鴨肉飯", tag: "經典主食", desc: "鮮嫩鴨肉切片搭配鹹香鴨油醬汁，滑順留香。" },
-      { name: "海鮮湯麵", tag: "澎湃主食", desc: "鮮蝦、蛤蜊與魚片熬出甜美湯頭，熱呼呼超順口。" },
-      { name: "生魚片丼飯", tag: "日式台味", desc: "滿滿新鮮厚切生魚片鋪在米飯上，沾點芥末超滿足。" },
-      { name: "麻油雞湯", tag: "滋補湯品", desc: "老薑黑麻油爆香雞肉，米酒香氣濃郁暖心暖胃。" },
-      { name: "台式炸豬排飯", tag: "經典便當", desc: "古早味香料醃製肉質紮實，淋上黑胡椒或咖哩醬。" },
-      { name: "蒜泥白肉", tag: "經典台菜", desc: "川燙特選五花肉切片，淋上滿滿蒜泥醬油膏。" }
+    // 完整的 36 家餐廳資料庫 (含英文店休日判斷)
+    var restaurantList = [
+      { name: "麥當勞", off: [], map: "" },
+      { name: "肯德基", off: [], map: "" },
+      { name: "拿坡里", off: [], map: "" },
+      { name: "必勝客", off: [], map: "" },
+      { name: "美珠土雞店", off: [1], map: "https://maps.app.goo.gl/Y2hL3krg3DHbXXkq8" },
+      { name: "小文", off: [2], map: "https://maps.app.goo.gl/uqv3uXAdW1ancuvd8" },
+      { name: "安一路潤餅", off: [0], map: "https://maps.app.goo.gl/YXCVkD5pLyyG3kL46" },
+      { name: "悟饕", off: [6, 0], map: "https://maps.app.goo.gl/dWLznpQyvk1SZ11n7" },
+      { name: "大無敵烤肉飯", off: [], map: "https://maps.app.goo.gl/khUZ81K5KntAwsTr9" },
+      { name: "北海鐵板燒", off: [3], map: "https://maps.app.goo.gl/7qKDjigoUvGV8oECL9" },
+      { name: "郭家巷頭粿仔湯", off: [], map: "https://maps.app.goo.gl/wUh9nfXYYraiZaw79" },
+      { name: "漫食雞肉便當", off: [2, 0], map: "https://maps.app.goo.gl/KDPJouj3eFnwYp2V9" },
+      { name: "富貴元", off: [6], map: "https://maps.app.goo.gl/YScF8m597zSHar5f7" },
+      { name: "紅豆坊", off: [3], map: "https://maps.app.goo.gl/3sHZ8bR38cLdSDJz6" },
+      { name: "西定路福隆便當", off: [], map: "https://maps.app.goo.gl/ypuRZSakojLcbAnm9" },
+      { name: "宜隆福隆便當", off: [1, 2, 3, 6, 0], map: "https://maps.app.goo.gl/HmdyTAmjcC3H8rQC8" },
+      { name: "竹籬", off: [0, 1], map: "https://maps.app.goo.gl/sthBr9PCaWXWy9jY8" },
+      { name: "連記蚵仔麵線肉圓", off: [0], map: "https://maps.app.goo.gl/qTE9tZRPVSzakbTW6" },
+      { name: "阿忠食堂", off: [6, 0], map: "https://maps.app.goo.gl/ui2FeaQNAZAscrFr5" },
+      { name: "小羅牛肉麵", off: [1, 2], map: "https://maps.app.goo.gl/Pqn8ppZiTMHUnpaL6" },
+      { name: "詹欽牛肉麵", off: [0], map: "https://maps.app.goo.gl/LMeFdv3rtWNgkmqQ9" },
+      { name: "一麵之緣", off: [3], map: "https://maps.app.goo.gl/dPHXNFP5gjQZpr8CA" },
+      { name: "復興27魷魚羹麵", off: [3, 0], map: "https://maps.app.goo.gl/XcYufd2ecNg527GB8" },
+      { name: "嬌媽媽手工大水餃", off: [6, 0], map: "https://maps.app.goo.gl/BncQv92vHFN9vheGA" },
+      { name: "八方雲集", off: [], map: "https://maps.app.goo.gl/nZ9ySetnfRVe7G6Q7" },
+      { name: "鼎好精緻美食", off: [6], map: "https://maps.app.goo.gl/QJNoUHxDsa3zCMhw9" },
+      { name: "飯殿", off: [1, 2], map: "https://maps.app.goo.gl/88QkvEc5zjcqQkKB9" },
+      { name: "巷仔口熱炒", off: [2], map: "https://maps.app.goo.gl/PVonXssCEDn6GMuB6" },
+      { name: "柯媽媽", off: [3, 0], map: "" },
+      { name: "中壢牛肉麵", off: [], map: "https://maps.app.goo.gl/xCpcNVWS34n9JhBJ9" },
+      { name: "火雞肉飯便當", off: [0], map: "https://maps.app.goo.gl/7MVHM8m5j15qS8Z3A" },
+      { name: "胖老爹", off: [3], map: "https://maps.app.goo.gl/QGbNyk3jMrJ9BvJ6" },
+      { name: "羅國夫", off: [0], map: "https://maps.app.goo.gl/Xq1ynVSxfTBdjxed7" },
+      { name: "好運涼麵", off: [], map: "https://maps.app.goo.gl/kHV9RPuxhaEwnCn8A" },
+      { name: "天一番肉羹順", off: [], map: "https://maps.app.goo.gl/dFeHziRw5fWR8G1u7" },
+      { name: "廟口滷排骨飯", off: [], map: "https://maps.app.goo.gl/oV66Sp6oHFHX28U36" },
+      { name: "廟口49號刈包四神湯", off: [], map: "https://maps.app.goo.gl/kcn2NoBuVEL7eTnv5" },
+      { name: "思維麵食館", off: [1], map: "https://maps.app.goo.gl/WqYirZuTUuec23by5" },
+      { name: "春美肉圓+麵線", off: [1], map: "https://maps.app.goo.gl/HKDjTVXnayX5ZS1y7" }
     ];
 
-    var isDrawing = false;
+    var availablePool = [];
+    var isRolling = false;
 
-    function drawFood() {
-      if (isDrawing) return;
-      isDrawing = true;
-
-      var pot = document.getElementById('pot');
-      var stick = document.getElementById('stick');
-      var resultContent = document.getElementById('resultContent');
-
-      // 重置籤與籤筒狀態
-      stick.classList.remove('pop-out');
-      pot.classList.add('shake');
-
-      setTimeout(function() {
-        // 隨機抽取美食
-        var randomIndex = Math.floor(Math.random() * foods.length);
-        var selected = foods[randomIndex];
-
-        // 設置籤條文字與卡片內容
-        stick.textContent = selected.name;
-        stick.classList.add('pop-out');
-        pot.classList.remove('shake');
-
-        resultContent.innerHTML = 
-          '<div class="food-tag">✨ ' + selected.tag + '</div>' +
-          '<div class="food-name">' + selected.name + '</div>' +
-          '<div class="food-desc">' + selected.desc + '</div>';
-
-        isDrawing = false;
-      }, 600);
+    // 初始化自動定位今天
+    function initDay() {
+      var todayDay = new Date().getDay(); // 0 = Sun, 1 = Mon ...
+      document.getElementById('daySelect').value = todayDay;
+      updateAvailablePool();
     }
+
+    // 依據選擇的星期，自動過濾公休店家
+    function updateAvailablePool() {
+      var selectedDay = parseInt(document.getElementById('daySelect').value);
+      availablePool = restaurantList.filter(function(item) {
+        return !item.off.includes(selectedDay);
+      });
+
+      var totalCount = restaurantList.length;
+      var activeCount = availablePool.length;
+      var closedCount = totalCount - activeCount;
+
+      document.getElementById('poolInfo').textContent = 
+        '總共 ' + totalCount + ' 家 | 當日營業 ' + activeCount + ' 家 | 公休過濾 ' + closedCount + ' 家';
+    }
+
+    // 開始樂透搖號動畫
+    function startLotto() {
+      if (isRolling) return;
+      if (availablePool.length === 0) {
+        alert('選取的當天所有店家剛好都公休喔！');
+        return;
+      }
+
+      isRolling = true;
+      var ball = document.getElementById('ball');
+      var ballNum = document.getElementById('ballNum');
+      var storeName = document.getElementById('storeName');
+      var storeStatus = document.getElementById('storeStatus');
+      var mapBtn = document.getElementById('mapBtn');
+
+      ball.classList.add('rolling');
+      mapBtn.style.display = 'none';
+      storeStatus.textContent = '🎰 樂透彩球滾動中...';
+
+      // 跳字動畫
+      var timer = setInterval(function() {
+        var randomTemp = availablePool[Math.floor(Math.random() * availablePool.length)];
+        storeName.textContent = randomTemp.name;
+        ballNum.textContent = Math.floor(Math.random() * 99) + 1;
+      }, 80);
+
+      // 2 秒後開獎
+      setTimeout(function() {
+        clearInterval(timer);
+        ball.classList.remove('rolling');
+
+        var finalWinner = availablePool[Math.floor(Math.random() * availablePool.length)];
+        var luckyNum = Math.floor(Math.random() * 89) + 10;
+
+        ballNum.textContent = luckyNum;
+        storeName.textContent = finalWinner.name;
+        storeStatus.textContent = '🎉 今日幸運首選 (已避開公休)';
+
+        if (finalWinner.map && finalWinner.map.trim() !== '') {
+          mapBtn.href = finalWinner.map;
+          mapBtn.style.display = 'block';
+        } else {
+          mapBtn.href = 'https://www.google.com/maps/search/' + encodeURIComponent(finalWinner.name);
+          mapBtn.style.display = 'block';
+        }
+
+        isRolling = false;
+      }, 2000);
+    }
+
+    window.onload = function() {
+      initDay();
+    };
   </script>
 </body>
 </html>
